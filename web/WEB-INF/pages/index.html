@@ -156,7 +156,7 @@
                 <p th:text="|价格:￥*{price}|">66.6</p>
                 <p th:text="|销量:*{saleCount}|">230</p>
                 <p th:text="|库存:*{bookCount}|">1000</p>
-                <button>加入购物车</button>
+                <button th:onclick="|addCart(*{id})|">加入购物车</button>
               </div>
 <!--              <div href="" class="list-item">-->
 <!--                <img src="./static/uploads/huranqiri.jpg" alt="">-->
