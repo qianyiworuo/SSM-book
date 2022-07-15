@@ -1,9 +1,11 @@
 package com.wd.book.service.impl;
 
 import com.wd.book.dao.CartItemDAO;
+import com.wd.book.pojo.Book;
 import com.wd.book.pojo.Cart;
 import com.wd.book.pojo.CartItem;
 import com.wd.book.pojo.User;
+import com.wd.book.service.BookService;
 import com.wd.book.service.CartItemService;
 
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 public class CartItemServiceImpl implements CartItemService {
     private CartItemDAO cartItemDAO;
+    private BookService bookService;
     @Override
     public boolean addCart(CartItem cartItem) {
         boolean bole = cartItemDAO.insertCart(cartItem);
@@ -57,10 +60,20 @@ public class CartItemServiceImpl implements CartItemService {
         }
     }
 
+    @Override
+    public List<CartItem> getCartItemList(User user) {
+        List<CartItem> cartItemList = cartItemDAO.selectCart(user);
+        for (CartItem cartItem : cartItemList) {
+            Book book = bookService.getBook(cartItem.getBook().getId());
+            cartItem.setBook(book);
+        }
+        return cartItemList;
+    }
+
     //獲取用戶的購物車信息
     @Override
     public Cart getCart(User user) {
-        List<CartItem> cartItemList = cartItemDAO.selectCart(user);
+        List<CartItem> cartItemList = getCartItemList(user);
         if (cartItemList != null){
             Map<Integer, CartItem> cartItemMap = new HashMap<>();
             for (CartItem cartItem: cartItemList) {

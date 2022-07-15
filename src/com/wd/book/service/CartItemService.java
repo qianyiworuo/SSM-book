@@ -10,5 +10,6 @@ public interface CartItemService {
     boolean addCart(CartItem cartItem);
     boolean updateCart(CartItem cartItem);
     void addOrUpdateCart(CartItem cartItem, Cart cart);
+    List<CartItem> getCartItemList(User user);
     Cart getCart(User user);
 }
