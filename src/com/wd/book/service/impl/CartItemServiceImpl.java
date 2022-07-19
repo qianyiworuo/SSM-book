@@ -85,4 +85,10 @@ public class CartItemServiceImpl implements CartItemService {
         }
         return null;
     }
+
+    @Override
+    public int delCartItem(Integer id) {
+        int dCount = cartItemDAO.delCartItem(id);
+        return dCount;
+    }
 }

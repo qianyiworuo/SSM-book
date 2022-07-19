@@ -12,4 +12,5 @@ public interface CartItemService {
     void addOrUpdateCart(CartItem cartItem, Cart cart);
     List<CartItem> getCartItemList(User user);
     Cart getCart(User user);
+    int delCartItem(Integer id);
 }
