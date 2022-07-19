@@ -19,23 +19,35 @@ public class OrderServiceImpl implements OrderService {
     private OrderItemService orderItemService;
     private CartItemService cartItemService;
     @Override
-    public int addOrderBean(OrderBean orderBean) {
-
+    public boolean addOrderBean(OrderBean orderBean) {
+        int dCount = 0;
 //        1.訂單表添加一條記錄
         int orderBeanId = orderDAO.addOrderBean(orderBean);//新增完成後，orderBean中的id為t_order表新增列的id
         orderBean.setId(orderBeanId);
 //        2.訂單詳情表添加購物車列表中的所有記錄
-        List<OrderItem> orderItemList = orderBean.getOrderItemList();
-        for (OrderItem orderItem : orderItemList) {
-            orderItemService.addOrderItem(orderItem);
-        }
-//        3.刪除用戶購物車詳情表中的數據
+        //orderBean中的orderItemList是空的，应该根据用户购物车列表项去遍历添加到orderItem中
         User currUser = orderBean.getOrderUser();
         Map<Integer, CartItem> cartItemMap = currUser.getCart().getCartItemMap();
         for (CartItem cartItem : cartItemMap.values()) {
-            cartItemService.delCartItem(cartItem.getId());
+            OrderItem orderItem = new OrderItem();
+            orderItem.setBook(cartItem.getBook());
+            orderItem.setBuyCount(cartItem.getBuyCount());
+            orderItem.setOrderBean(orderBean);
+            orderItemService.addOrderItem(orderItem);
+            //cartItemService.delCartItem(cartItem.getId());
         }
-
-        return 0;
+        //List<OrderItem> orderItemList = orderBean.getOrderItemList();
+        //for (OrderItem orderItem : orderItemList) {
+        //    orderItemService.addOrderItem(orderItem);
+        //}
+//        3.刪除用戶購物車詳情表中的數據
+        for (CartItem cartItem : cartItemMap.values()) {
+            cartItemService.delCartItem(cartItem.getId());
+            dCount++;
+        }
+        if(dCount == cartItemMap.size()){
+            return true;
+        }
+        return false;
     }
 }

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>我的订单</title>
-    <link rel="stylesheet" href="../../static/css/minireset.css" />
-    <link rel="stylesheet" href="../../static/css/common.css" />
-    <link rel="stylesheet" href="../../static/css/cart.css" />
-    <link rel="stylesheet" href="../../static/css/bookManger.css" />
-    <link rel="stylesheet" href="../../static/css/orderManger.css" />
+    <link rel="stylesheet" th:href="@{/static/css/minireset.css}"/>
+    <link rel="stylesheet" th:href="@{static/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/cart.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bookManger.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/orderManger.css}"/>
   </head>
   <body>
     <div class="header">

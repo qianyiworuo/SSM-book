@@ -7,7 +7,7 @@ import com.wd.book.pojo.OrderBean;
 public class OrderDAOImpl extends BaseDAO<OrderBean> implements OrderDAO {
     @Override
     public int addOrderBean(OrderBean orderBean) {
-        String sql = "INSERT INTO t_order (id, orderNo, orderDate, orderUser, orderMoney, orderStatus) VALUES(0,?,?,?,?,?,?)";
+        String sql = "INSERT INTO t_order (id, orderNo, orderDate, orderUser, orderMoney, orderStatus) VALUES(0,?,?,?,?,?)";
         int orderBeanId = executeUpdate(sql, orderBean.getOrderNo(), orderBean.getOrderDate(), orderBean.getOrderUser().getId(), orderBean.getOrderMoney(), orderBean.getOrderStatus());
         //此處返回的為INSERT的自增列的id
         return orderBeanId;

@@ -11,7 +11,7 @@ public class CartItemDAOImpl extends BaseDAO<CartItem> implements CartItemDAO {
     @Override
     public boolean insertCart(CartItem cartItem) {
         String sql = "INSERT INTO t_cart_item (id, book, buyCount, userBean) VALUES (0, ?, ?, ?)";
-        int insertCount = executeUpdate(sql, cartItem.getBook(), cartItem.getBuyCount(), cartItem.getUserBean().getId());
+        int insertCount = executeUpdate(sql, cartItem.getBook().getId(), cartItem.getBuyCount(), cartItem.getUserBean().getId());
         if(insertCount > 0){
             return true;
         }

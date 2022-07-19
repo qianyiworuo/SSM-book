@@ -18,6 +18,8 @@
     <bean id="userDAO" class="com.wd.book.dao.impl.UserDAOImpl"/>
     <bean id="bookDAO" class="com.wd.book.dao.impl.BookDAOImpl"/>
     <bean id="cartItemDAO" class="com.wd.book.dao.impl.CartItemDAOImpl"/>
+    <bean id="orderDAO" class="com.wd.book.dao.impl.OrderDAOImpl"/>
+    <bean id="orderItemDAO" class="com.wd.book.dao.impl.OrderItemImpl"/>
 
     <!-- service -->
     <bean id="userService" class="com.wd.book.service.impl.UserServiceImpl">
@@ -29,6 +31,14 @@
     <bean id="cartItemService" class="com.wd.book.service.impl.CartItemServiceImpl">
         <property name="cartItemDAO" ref="cartItemDAO"/>
         <property name="bookService" ref="bookService"/>
+    </bean>
+    <bean id="orderService" class="com.wd.book.service.impl.OrderServiceImpl">
+        <property name="orderDAO" ref="orderDAO"/>
+        <property name="orderItemService" ref="orderItemService"/>
+        <property name="cartItemService" ref="cartItemService"/>
+    </bean>
+    <bean id="orderItemService" class="com.wd.book.service.impl.OrderItemServiceImpl">
+        <property name="orderItemDAO" ref="orderItemDAO"/>
     </bean>
 
     <!-- controller-->
@@ -42,6 +52,8 @@
     <bean id="cart" class="com.wd.book.controller.CartItemController">
         <property name="cartItemService" ref="cartItemService"/>
     </bean>
-
+    <bean id="order" class="com.wd.book.controller.OrderController">
+        <property name="orderService" ref="orderService"/>
+    </bean>
 
 </beans>
