@@ -16,7 +16,7 @@ public class CartItemController {
         Cart cart = cartItemService.getCart(user);
         user.setCart(cart);
         session.setAttribute("currUser", user);
-//        return "index";
+        //return "index";
         return "cart/cart";
     }
     public String addCart(Integer bookId, HttpSession session){

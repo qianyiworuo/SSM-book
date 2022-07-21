@@ -50,4 +50,10 @@ public class OrderServiceImpl implements OrderService {
         }
         return false;
     }
+
+    @Override
+    public List<OrderBean> getOrderList(Integer id) {
+        List<OrderBean> orderList = orderDAO.getOrderList(id);
+        return orderList;
+    }
 }

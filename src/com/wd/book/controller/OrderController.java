@@ -7,6 +7,7 @@ import com.wd.book.service.OrderService;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class OrderController {
@@ -16,8 +17,21 @@ public class OrderController {
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String strNowDate = sdf.format(now);
-        String[] split = strNowDate.split("-");
-        orderBean.setOrderNo(UUID.randomUUID().toString()+"_"+ split.toString());
+        String rpSrt = strNowDate.replace("-", "");
+        String reDate = rpSrt.replace(":", "");
+        String sNowDate = reDate.replace(" ", "");
+//        String[] split = strNowDate.split("-");
+//        StringBuffer sb = new StringBuffer();
+//        for(int i = 0; i < split.length; i++){
+//            sb.append(split[i]);
+//        }
+//        String strDate = sb.toString();
+//        String[] split1 = strDate.split(":");
+//        StringBuffer sb1 = new StringBuffer();
+//        for(int i = 0; i < split1.length; i++){
+//            sb1.append(split[i]);
+//        }
+        orderBean.setOrderNo(UUID.randomUUID().toString()+"_"+ sNowDate);
         orderBean.setOrderDate(now);
         User currUser = (User) session.getAttribute("currUser");
         orderBean.setOrderUser(currUser);
@@ -28,5 +42,11 @@ public class OrderController {
             return "redirect:cart.do";
         }
         return "redirect:book.do";
+    }
+    public String getOrderList(HttpSession session){
+        User user = (User) session.getAttribute("currUser");
+        List<OrderBean> orderList = orderService.getOrderList(user.getId());
+        session.setAttribute("order", orderList);
+        return "order/order";
     }
 }
