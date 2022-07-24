@@ -12,6 +12,7 @@ public class OrderBean {
     private Integer orderStatus;//订单状态
 
     private List<OrderItem> orderItemList ;     //1:N订单详情
+    private Integer totalBuyCount;
 
     public OrderBean(){}
     public OrderBean(Integer id){
@@ -72,5 +73,13 @@ public class OrderBean {
 
     public void setOrderItemList(List<OrderItem> orderItemList) {
         this.orderItemList = orderItemList;
+    }
+
+    public Integer getTotalBuyCount() {
+        return totalBuyCount;
+    }
+
+    public void setTotalBuyCount(Integer totalBuyCount) {
+        this.totalBuyCount = totalBuyCount;
     }
 }

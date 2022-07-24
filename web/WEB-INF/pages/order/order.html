@@ -15,13 +15,13 @@
       <div class="w">
         <div class="header-left">
           <a href="../../index.html">
-            <img src="../../static/img/logo.gif" alt=""
+            <img th:src="@{/static/img/logo.gif}" alt=""
           /></a>
           <h1>我的订单</h1>
         </div>
         <div class="header-right">
-          <h3>欢迎<span>张总</span>光临尚硅谷书城</h3>
-          <div class="order"><a th:href="@{}">我的订单</a></div>
+          <h3>欢迎<span th:text="${session.currUser.getUname()}">张总</span>光临尚硅谷书城</h3>
+          <div class="order"><a th:href="@{/order.do(operate='getOrderList')}">我的订单</a></div>
           <div class="destory"><a href="../../index.html">注销</a></div>
           <div class="gohome">
             <a href="../../index.html">返回</a>
@@ -43,13 +43,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>12354456895</td>
-              <td>
+            <tr th:each="orderList : ${session.order}" th:object="${orderList}">
+              <td th:text="*{orderNo}">12354456895</td>
+              <td th:text="*{orderDate}">
                 2015.04.23
               </td>
-              <td>90.00</td>
-              <td>88</td>
+              <td th:text="*{orderMoney}">90.00</td>
+              <td th:text="${session.currUser.cart.totalCount}">88</td>
               <td><a href="" class="send">等待发货</a></td>
               <td><a href="">查看详情</a></td>
             </tr>
