@@ -4,6 +4,7 @@ import com.atguigu.myssm.basedao.BaseDAO;
 import com.wd.book.dao.OrderDAO;
 import com.wd.book.pojo.OrderBean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class OrderDAOImpl extends BaseDAO<OrderBean> implements OrderDAO {
@@ -20,5 +21,14 @@ public class OrderDAOImpl extends BaseDAO<OrderBean> implements OrderDAO {
         String sql = "SELECT id, orderNo, orderDate, orderUser, orderMoney, orderStatus FROM t_order WHERE orderUser = ?";
         List<OrderBean> orderBeanList = executeQuery(sql, id);
         return orderBeanList;
+    }
+
+    @Override
+    public int getBuyTotalCount(OrderBean orderBean) {
+        String sql = "SELECT SUM(C.buyCount) AS totalByCount, C.orderBean FROM ";
+               sql += " (SELECT A.id, B.buyCount, B.orderBean FROM t_order A INNER JOIN t_order_item B ON A.id = B.orderBean WHERE A.orderUser = ? ) C";
+               sql += " WHERE C.orderBean = ? GROUP BY C.orderBean";
+        int totCount = ((BigDecimal) executeComplexQuery(sql, orderBean.getOrderUser().getId(), orderBean.getId())[0]).intValue();
+        return totCount;
     }
 }

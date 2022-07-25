@@ -54,6 +54,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderBean> getOrderList(Integer id) {
         List<OrderBean> orderList = orderDAO.getOrderList(id);
+        for (OrderBean orderBean :orderList) {
+            int buyTotalCount = getBuyTotalCount(orderBean);
+            orderBean.setTotalBuyCount(buyTotalCount);
+        }
         return orderList;
+    }
+
+    @Override
+    public int getBuyTotalCount(OrderBean orderBean) {
+        int buyTotalCount = orderDAO.getBuyTotalCount(orderBean);
+        return buyTotalCount;
     }
 }

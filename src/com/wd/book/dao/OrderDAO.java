@@ -9,4 +9,6 @@ public interface OrderDAO {
     int addOrderBean(OrderBean orderBean);
     //通过userId获取订单列表
     List<OrderBean> getOrderList(Integer id);
+    //获取订单商品总数量
+    int getBuyTotalCount(OrderBean orderBean);
 }
