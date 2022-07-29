@@ -29,4 +29,13 @@ public class CartItemController {
 
         return "redirect:cart.do";
     }
+    public String editCart(Integer cartItemId, Integer orderCount){
+        CartItem cartItem = new CartItem(cartItemId);
+        cartItem.setBuyCount(orderCount);
+        boolean b = cartItemService.updateCart(cartItem);
+        if(b){
+            return "redirect:cart.do";
+        }
+        return null;
+    }
 }

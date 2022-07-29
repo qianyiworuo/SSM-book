@@ -11,4 +11,5 @@ public interface CartItemDAO {
     List<CartItem> selectCart(User user);
     //刪除指定的購物車列表項
     int delCartItem(Integer id);
+    //更改購物車中訂單商品的數量
 }

@@ -23,7 +23,7 @@ public class CartItemDAOImpl extends BaseDAO<CartItem> implements CartItemDAO {
     public boolean updateCart(CartItem cartItem) {
         String sql = "UPDATE t_cart_item SET buyCount = ? WHERE id = ?";
         int updateCount = executeUpdate(sql, cartItem.getBuyCount(), cartItem.getId());
-        if(updateCount > 0){
+        if(updateCount == 0){
             return true;
         }
         return false;
