@@ -52,10 +52,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderBean> getOrderList(Integer id) {
-        List<OrderBean> orderList = orderDAO.getOrderList(id);
-        for (OrderBean orderBean :orderList) {
-            int buyTotalCount = getBuyTotalCount(orderBean);
+    public List<OrderBean> getOrderList(User user) {
+        List<OrderBean> orderList = orderDAO.getOrderList(user);
+        for (OrderBean orderBean : orderList) {
+            Integer buyTotalCount = getBuyTotalCount(orderBean);
             orderBean.setTotalBuyCount(buyTotalCount);
         }
         return orderList;

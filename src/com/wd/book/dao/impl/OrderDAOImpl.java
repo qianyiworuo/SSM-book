@@ -3,6 +3,7 @@ package com.wd.book.dao.impl;
 import com.atguigu.myssm.basedao.BaseDAO;
 import com.wd.book.dao.OrderDAO;
 import com.wd.book.pojo.OrderBean;
+import com.wd.book.pojo.User;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,9 +18,9 @@ public class OrderDAOImpl extends BaseDAO<OrderBean> implements OrderDAO {
     }
 
     @Override
-    public List<OrderBean> getOrderList(Integer id) {
+    public List<OrderBean> getOrderList(User user) {
         String sql = "SELECT id, orderNo, orderDate, orderUser, orderMoney, orderStatus FROM t_order WHERE orderUser = ?";
-        List<OrderBean> orderBeanList = executeQuery(sql, id);
+        List<OrderBean> orderBeanList = executeQuery(sql, user.getId());
         return orderBeanList;
     }
 

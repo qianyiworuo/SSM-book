@@ -45,7 +45,7 @@ public class OrderController {
     }
     public String getOrderList(HttpSession session){
         User user = (User) session.getAttribute("currUser");
-        List<OrderBean> orderList = orderService.getOrderList(user.getId());
+        List<OrderBean> orderList = orderService.getOrderList(user);
         session.setAttribute("order", orderList);
         return "order/order";
     }
