@@ -11,4 +11,10 @@ public class UserServiceImpl implements UserService {
         User user = userDAO.getUser(uname, pwd);
         return user;
     }
+
+    @Override
+    public int regist(User user) {
+        int iCount = userDAO.addUser(user);
+        return iCount;
+    }
 }

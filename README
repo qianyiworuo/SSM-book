@@ -43,3 +43,13 @@ Thymeleaf循環渲染
 SELECT SUM(C.buyCount) AS totalByCount, C.orderBean  FROM
 (SELECT A.id, B.buyCount, B.orderBean FROM t_order A INNER JOIN t_order_item B ON A.id = B.orderBean
 WHERE A.orderUser = 1) C  GROUP BY C.orderBean
+
+Cookie
+    @webServlet("/cookie01")
+    1.继承extends HttpServlet类
+    2.重写service方法
+    3.创建一个Cookie对象
+    Cookie cookie = new Cookie("name", "ljc");
+    4.将Cookie对象保存到浏览器端
+    response.addCookie(cookie);
+    request.getRequestDispatcher("hello01.html").forward(request, response);
