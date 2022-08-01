@@ -71,7 +71,7 @@ function chkUname(uname){
     createXMLHttpRequest();
     var url = "user.do?operate=chkUname&uname=" + uname;
     //开启异步传输
-    XMLHttpRequest.open(url,"GET",true);
+    XMLHttpRequest.open("GET",url,true);
     //设置回调函数
     XMLHttpRequest.onreadystatechange = chkUnameCB;
     //发送请求
@@ -79,7 +79,15 @@ function chkUname(uname){
 }
 function chkUnameCB(){
     if(XMLHttpRequest.readyState == "4" && XMLHttpRequest.status == 200){
-        alert("Hello Ajax!");
-
+        //XMLHttpRequest.responseText表示服务器响应到客户端的文本内容
+        //alert(XMLHttpRequest.responseText);
+        var respText = XMLHttpRequest.responseText;
+        if(respText == "{'uname' : '1'}"){
+            alert("用户名已存在，请重新注册！");
+        }
+        else{
+            alert("OK!")
+        }
+        //alert("Hello Ajax!");
     }
 }
