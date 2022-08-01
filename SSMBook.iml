@@ -25,5 +25,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.72" level="application_server_libraries" />
     <orderEntry type="library" name="myssm01" level="project" />
+    <orderEntry type="library" name="kaptcha-2.3.2" level="project" />
   </component>
 </module>

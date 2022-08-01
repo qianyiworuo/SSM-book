@@ -17,4 +17,10 @@ public class UserServiceImpl implements UserService {
         int iCount = userDAO.addUser(user);
         return iCount;
     }
+
+    @Override
+    public User chkUname(String uname) {
+        User user = userDAO.getByUname(uname);
+        return user;
+    }
 }

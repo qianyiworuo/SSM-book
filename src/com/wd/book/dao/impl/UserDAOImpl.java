@@ -18,4 +18,11 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
         int iCount = executeUpdate(sql, user.getUname(), user.getPwd(), user.getEmail(), user.getRole());
         return iCount;
     }
+
+    @Override
+    public User getByUname(String uname) {
+        String sql = "SELECT id, uname, pwd, email, role FROM t_user WHERE uname like ?";
+        User user = load(sql, uname);
+        return user;
+    }
 }

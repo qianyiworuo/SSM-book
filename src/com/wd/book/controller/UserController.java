@@ -46,6 +46,15 @@ public class UserController {
             }
         }
         return "user/login";
-
+    }
+    public String chkUname(String uname){
+        User user = userService.chkUname(uname);
+        if (user != null){
+            //用户名已存在，不能注册
+            return "json:{'uname' : '1'}";
+        }else {
+            //可以注册
+            return "json:{'uname' : '0'}";
+        }
     }
 }
