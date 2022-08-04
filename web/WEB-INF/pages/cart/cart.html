@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{/static/css/minireset.css}" />
     <link rel="stylesheet" th:href="@{/static/css/common.css}" />
     <link rel="stylesheet" th:href="@{/static/css/cart.css}" />
+    <script language="JavaScript" th:src="@{/static/script/vue.js}"></script>
+    <script language="JavaScript" th:src="@{/static/script/axios.js}"></script>
     <script language="JavaScript" th:src="@{/static/script/cart.js}"></script>
   </head>
   <body>
@@ -27,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="list">
+    <div class="list" id="cart_div">
       <div class="w">
         <table>
           <thead>
@@ -42,18 +44,26 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="cartItem : ${session.currUser.cart.cartItemMap.values()}">
+<!--          th:each="cartItem : ${session.currUser.cart.cartItemMap.values()}"-->
+            <tr v-for="cartItem in cart.cartItemMap" >
               <td>
-                <img th:src="@{|/static/uploads/${cartItem.book.bookImg}|}" alt="" />
+<!--                <img th:src="@{|/static/uploads/${cartItem.book.bookImg}|}" alt="" />-->
+                <img :src="'/static/uploads/'+cartItem.book.bookImg">
               </td>
-              <td th:text="${cartItem.book.bookName}">活着</td>
-              <td>
-                <span class="count" th:onclick="|editCart(${cartItem.id}, ${cartItem.buyCount - 1})|">-</span>
-                <input class="count-num" type="text" value="1" th:value="${cartItem.buyCount}"/>
-                <span class="count" th:onclick="|editCart(${cartItem.id} , ${cartItem.buyCount + 1})|">+</span>
-              </td>
-              <td th:text="${cartItem.book.price}">36.8</td>
-              <td th:text="${cartItem.subTotal}">36.8</td>
+<!--              <td th:text="${cartItem.book.bookName}">活着</td>-->
+              <td>{{cartItem.book.bookName}}</td>
+            <td>
+<!--                <span class="count" th:onclick="|editCart(${cartItem.id}, ${cartItem.buyCount - 1})|">-</span>-->
+              <span class="count" @click="editCart(cartItem.id,cartItem.buyCount - 1)">-</span>
+<!--                <input class="count-num" type="text" value="1" th:value="${cartItem.buyCount}"/>-->
+              <input class="count-num" type="text" value="1" :value="cartItem.buyCount"/>
+<!--                <span class="count" th:onclick="|editCart(${cartItem.id} , ${cartItem.buyCount + 1})|">+</span>-->
+              <span class="count" @click="editCart(cartItem.id,cartItem.buyCount + 1)">+</span>
+             </td>
+<!--              <td th:text="${cartItem.book.price}">36.8</td>-->
+              <td>{{cartItem.book.price}}</td>
+<!--              <td th:text="${cartItem.subTotal}">36.8</td>-->
+              <td>{{cartItem.subTotal}}</td>
               <td><a href="">删除</a></td>
             </tr>
           </tbody>

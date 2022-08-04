@@ -66,6 +66,8 @@ public class CartItemServiceImpl implements CartItemService {
         for (CartItem cartItem : cartItemList) {
             Book book = bookService.getBook(cartItem.getBook().getId());
             cartItem.setBook(book);
+            //调用cartItem类内部小计方法，从而获取到小计属性值(解决购物车详情页面，金额不显示问题)
+            cartItem.getSubTotal();
         }
         return cartItemList;
     }

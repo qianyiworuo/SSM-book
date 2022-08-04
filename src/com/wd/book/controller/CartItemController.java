@@ -1,5 +1,7 @@
 package com.wd.book.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.wd.book.pojo.Book;
 import com.wd.book.pojo.Cart;
 import com.wd.book.pojo.CartItem;
@@ -7,6 +9,7 @@ import com.wd.book.pojo.User;
 import com.wd.book.service.CartItemService;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Type;
 
 public class CartItemController {
     private CartItemService cartItemService;
@@ -37,5 +40,12 @@ public class CartItemController {
             return "redirect:cart.do";
         }
         return null;
+    }
+    public String cartInfo(HttpSession session){
+        User user = (User) session.getAttribute("currUser");
+        Cart cart = cartItemService.getCart(user);
+        Gson gson = new GsonBuilder().create();
+        String cartStr = gson.toJson(cart);
+        return "json:"+cartStr;
     }
 }

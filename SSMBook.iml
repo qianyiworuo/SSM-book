@@ -22,9 +22,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.72" level="application_server_libraries" />
-    <orderEntry type="library" name="myssm01" level="project" />
-    <orderEntry type="library" name="kaptcha-2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 8.5.72" level="application_server_libraries" />
+    <orderEntry type="library" exported="" name="kaptcha-2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
+    <orderEntry type="library" exported="" name="myssm01" level="project" />
   </component>
 </module>

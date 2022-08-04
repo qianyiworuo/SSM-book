@@ -54,11 +54,16 @@ public class CartItem {
         this.userBean = userBean;
     }
 
+    public void setSubTotal(Double subTotal) {
+        this.subTotal = subTotal;
+    }
+
     public Double getSubTotal() {
         BigDecimal bigDecimalPrice = new BigDecimal(String.valueOf(book.getPrice()));
         BigDecimal bigDecimalCount = new BigDecimal(String.valueOf(buyCount));
         BigDecimal multiply = bigDecimalCount.multiply(bigDecimalPrice);
         double subTotal = multiply.doubleValue();
+        setSubTotal(subTotal);
         return subTotal;
     }
 }
