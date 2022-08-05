@@ -39,8 +39,13 @@ public class Cart {
                 BigDecimal total = bigDecimalTotal.add(bigDecimalSubTotal);
                 totalPrice = total.doubleValue();
             }
+            setTotalPrice(totalPrice);
         }
         return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Integer getTotalCount() {
@@ -48,7 +53,12 @@ public class Cart {
         if(cartItemMap != null && cartItemMap.size() > 0){
             totalCount = cartItemMap.size();
         }
+        setTotalCount(totalCount);
         return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 
     public Integer getTotalGoods() {
@@ -60,6 +70,11 @@ public class Cart {
                 totalGoods += cartItem.getBuyCount();
             }
         }
+        setTotalGoods(totalGoods);
         return totalGoods;
+    }
+
+    public void setTotalGoods(Integer totalGoods) {
+        this.totalGoods = totalGoods;
     }
 }

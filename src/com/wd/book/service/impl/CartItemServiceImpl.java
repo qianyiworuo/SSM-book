@@ -83,6 +83,10 @@ public class CartItemServiceImpl implements CartItemService {
             }
             Cart cart = new Cart();
             cart.setCartItemMap(cartItemMap);
+            //调用cart实体类中总金额，与商品总数量方法，获得总金额，商品总数量。
+            cart.getTotalPrice();
+            cart.getTotalCount();
+            cart.getTotalGoods();
             return cart;
         }
         return null;

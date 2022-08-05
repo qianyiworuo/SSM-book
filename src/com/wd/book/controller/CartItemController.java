@@ -41,11 +41,25 @@ public class CartItemController {
         }
         return null;
     }
+    //异步请求方法
     public String cartInfo(HttpSession session){
         User user = (User) session.getAttribute("currUser");
         Cart cart = cartItemService.getCart(user);
+        //调用cart实体类中总金额，与商品总数量方法，获得总金额，商品总数量。
+        cart.getTotalPrice();
+        cart.getTotalCount();
         Gson gson = new GsonBuilder().create();
         String cartStr = gson.toJson(cart);
         return "json:"+cartStr;
     }
+    public String editCartInfo(Integer cartItemId, Integer orderCount){
+        CartItem cartItem = new CartItem(cartItemId);
+        cartItem.setBuyCount(orderCount);
+        boolean b = cartItemService.updateCart(cartItem);
+        if(b){
+            return "json:"+110;
+        }
+        return null;
+    }
+
 }
